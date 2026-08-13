@@ -1,7 +1,10 @@
 {
 	"$schema": "https://schema.cloudflare.com/wrangler/2024-10-01",
-	"name": "astro-cloudflare",
+	"name": "apcloudservices",
 	"compatibility_date": "2026-06-24",
+	"assets": {
+    "directory": "./dist"
+  },
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
