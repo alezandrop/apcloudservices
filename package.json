@@ -27,9 +27,11 @@
     "test:e2e": "playwright test",
     "validate:i18n": "node scripts/validate-i18n.js",
     "validate:secrets": "node scripts/validate-secrets.cjs",
-    "postbuild": "node scripts/generate-media-manifest.cjs"
+    "postbuild": "node scripts/generate-media-manifest.cjs",
+    "generate-types": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^14.2.1",
     "@astrojs/mdx": "^7.0.3",
     "@astrojs/react": "^6.0.1",
     "@astrojs/rss": "^4.0.19",
@@ -50,6 +52,7 @@
     "sharp": "^0.35.3",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.2",
+    "wrangler": "^4.123.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

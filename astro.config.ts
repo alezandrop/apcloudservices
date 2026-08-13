@@ -9,6 +9,8 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, extname, basename } from "node:path";
 import { siteConfig } from "./src/config/site.config";
 
+import cloudflare from "@astrojs/cloudflare";
+
 async function collectFiles(dir: string, extensions: string[]): Promise<string[]> {
   const results: string[] = [];
   const entries = await readdir(dir, { withFileTypes: true });
@@ -104,15 +106,18 @@ function contentValidationIntegration() {
 
 export default defineConfig({
   site: siteConfig.url,
+
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
     prefixDefaultLocale: false,
   },
+
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "hover",
   },
+
   integrations: [
     starlight({
       title: siteConfig.name,
@@ -166,6 +171,7 @@ export default defineConfig({
     react(),
     icon(),
   ],
+
   env: {
     schema: {
       SITE_URL: envField.string({ context: "server", access: "public", default: "http://localhost:4321" }),
@@ -177,22 +183,29 @@ export default defineConfig({
       PUBLIC_PRIVACY_POLICY_URL: envField.string({ context: "client", access: "public", optional: true }),
     },
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
   build: {
     format: "directory",
   },
+
   markdown: {
     shikiConfig: {
       theme: "github-dark",
       wrap: true,
     },
   },
+
   image: {
     layout: "constrained",
   },
+
   security: {
     checkOrigin: true,
   },
+
+  adapter: cloudflare()
 });
